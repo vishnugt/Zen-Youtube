@@ -1,24 +1,42 @@
-function removeElementsByClass(className){
+function removeElementsByClass(className) {
   const elements = document.getElementsByClassName(className);
-  while(elements.length > 0){
-      elements[0].parentNode.removeChild(elements[0]);
+  while (elements.length > 0) {
+    elements[0].parentNode.removeChild(elements[0]);
   }
 }
 
 function removeElementById(id) {
   const element = document.getElementById(id);
-  if(element) {
+  if (element) {
     element.parentNode.removeChild(element);
   }
 }
 
-//Recommendations menu
-removeElementsByClass("ytd-item-section-renderer")
-removeElementsByClass("ytd-watch-next-secondary-results-renderer")
+function removeYoutubeElements() {
+    //Recommendations menu
+    removeElementById("related")
+  
+    //homepage
+    removeElementsByClass("ytd-rich-grid-renderer")
+  
+    //Left side bar
+    removeElementById("guide-renderer")
+  
+  
+    //Comments section
+    removeElementById("comments")
+  
+    //youtube premium banner
+    removeElementById("masthead-ad")
+    removeElementsByClass("ytd-banner-promo-renderer-inline-image") //redundant
+    removeElementsByClass("ytd-banner-promo-renderer") //redundant
+}
 
-//homepage
-removeElementsByClass("ytd-two-column-browse-results-renderer")
+let observer = new MutationObserver((mutations) => {
+  removeYoutubeElements();
+})
 
-
-//Left side bar
-removeElementById("guide-renderer")
+observer.observe(document.body, {
+  childList: true
+  , subtree: true
+})
