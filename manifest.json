@@ -1,9 +1,9 @@
 {
-    "name": "Youtube Remove feed",
+    "name": "Zen YouTube: Distraction free youtube",
     "version": "1.0.0",
     "manifest_version": 2,
-    "description": "Removes feed and recommendations from Youtube",
-    "homepage_url": "https://github.com/vishnugt/Youtube-remove-feed",
+    "description": "Removes feed and recommendations from YouTube so that you can have a distraction free focused session",
+    "homepage_url": "https://github.com/vishnugt/Zen-Youtube",
     "icons": {
         "16": "icons/icon16.png",
         "48": "icons/icon48.png",
@@ -14,6 +14,7 @@
     ],
     "content_scripts": [
         {
+            "run_at": "document_start",
             "matches": [
                 "https://www.youtube.com/*"
             ],
