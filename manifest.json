@@ -1,0 +1,26 @@
+{
+    "name": "Youtube Remove feed",
+    "version": "1.0.0",
+    "manifest_version": 2,
+    "description": "Removes feed and recommendations from Youtube",
+    "homepage_url": "https://github.com/vishnugt/Youtube-remove-feed",
+    "icons": {
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+      },
+    "permissions": [
+        "https://www.youtube.com/*"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.youtube.com/*"
+            ],
+            "js": [
+                "inject.js"
+            ],
+            "all_frames": true
+        }
+    ]
+}
