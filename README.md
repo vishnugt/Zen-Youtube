@@ -1,6 +1,6 @@
 # Youtube remove feed
 
-This chrome extension removed the feed and recommendation of youtube 
+This chrome extension removes your feed, recommendations and comments
 
 # Instructions for installing this chrome extension:
 
