@@ -2,7 +2,7 @@
 
 This chrome extension removes your feed, recommendations and comments
 
-![image](https://user-images.githubusercontent.com/7014475/137627669-4bc8f8bf-4074-4240-87c9-61c190e4ef5f.png)
+![image](https://user-images.githubusercontent.com/7014475/137627846-e09e1220-0e34-4c8b-891e-c3a64ed0e029.png)
 ![image](https://user-images.githubusercontent.com/7014475/137627758-11a65065-87f0-407c-a8d6-16c144196788.png)
 ![image](https://user-images.githubusercontent.com/7014475/137627764-ac969f62-d94b-4729-ab6d-ad09fcced664.png)
 
