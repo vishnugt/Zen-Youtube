@@ -4,9 +4,19 @@ h2 {
 	margin-bottom: 0px;
 }
 
-div {
-	width: 150px;
-	height: 170px;
+.mainview {
+	width: 200px;
+	height: 175px;
+}
+
+.header img {
+  float: left;
+}
+
+.header h1 {
+  position: relative;
+  top: 6px;
+  left: 10px;
 }
 
 .center { 

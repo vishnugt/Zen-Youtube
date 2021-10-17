@@ -13,77 +13,45 @@ function removeElementById(id) {
 }
 
 function setDisplayStyleUsingElementById(id, styleValue) {
-    document.getElementById(id).style.display = styleValue;
+    if (document.getElementById(id)) {
+        document.getElementById(id).style.display = styleValue;
+    }
 }
 
 function setDisplayStyleUsingElementsByClass(className, styleValue) {
     var x = document.getElementsByClassName(className);
-    var i;
-    for (i = 0; i < x.length; i++) {
+    for (var i = 0; i < x.length; i++) {
         x[i].style.display = styleValue;
     }
 }
 
 // Variables to control
-var blockComments = true;
-var leftSidebar = true;
-var recommendation = true;
-var homeFeed = true;
+var blockComments = 'none';
+var leftSidebar = 'none';
+var recommendation = 'none';
+var homeFeed = 'none';
 
 chrome.storage.sync.get(['block_comments', 'left_side_bar', 'recommendations', 'home_feed'], function (obj) {
-    blockComments = obj.block_comments;
-    leftSidebar = obj.left_side_bar;
-    recommendation = obj.recommendations;
-    homeFeed = obj.home_feed;
+    blockComments = obj.block_comments = undefined ? blockComments : obj.block_comments;
+    leftSidebar = obj.leftSidebar == undefined ? leftSidebar : obj.leftSidebar;
+    recommendation = obj.recommendation == undefined ? recommendation : obj.recommendation;
+    homeFeed = obj.homeFeed == undefined ? homeFeed : obj.homeFeed;
 });
 
 function removeYoutubeElements() {
-    // Comments Section
-    if (document.getElementById("comments")) {
-        if (blockComments) {
-            //document.getElementById("comments").style.display = 'none';
-            setDisplayStyleUsingElementById("comments", 'none');
-        } else {
-            //document.getElementById("comments").style.display = '';
-            setDisplayStyleUsingElementById("comments", '');
-        }
-    }
 
-    // Home Feed
-    if (document.getElementsByClassName("ytd-rich-grid-renderer")) {
-        if (homeFeed) {
-            setDisplayStyleUsingElementsByClass("ytd-rich-grid-renderer", 'none');
-        } else {
-            setDisplayStyleUsingElementsByClass("ytd-rich-grid-renderer", '');
-        }
-    }
+    //Comments section
+    setDisplayStyleUsingElementById("comments", blockComments);
 
-    // Left Side Bar
-    if (document.getElementById("guide-renderer")) {
-        if (leftSidebar) {
-            //document.getElementById("guide-renderer").style.display = 'none';
-            setDisplayStyleUsingElementById("guide-renderer", 'none');
-        } else {
-            //document.getElementById("guide-renderer").style.display = '';
-            setDisplayStyleUsingElementById("guide-renderer", '');
-        }
-    }
+    //Home feed
+    setDisplayStyleUsingElementsByClass("ytd-rich-grid-renderer", homeFeed);
+
+    //Left side bar
+    setDisplayStyleUsingElementById("guide-renderer", leftSidebar);
 
     //Recommendations
-    if (document.getElementById("related")) {
-        if (recommendation) {
-            //document.getElementById("related").style.display = 'none';
-            setDisplayStyleUsingElementById("related", 'none');
-        } else {
-            //document.getElementById("related").style.display = '';
-            setDisplayStyleUsingElementById("related", '');
-        }
-    }
-
-    //youtube premium banner
-    removeElementById("masthead-ad")
-    removeElementsByClass("ytd-banner-promo-renderer-inline-image") //redundant
-    removeElementsByClass("ytd-banner-promo-renderer") //redundant
+    setDisplayStyleUsingElementById("related", recommendation);
+    setDisplayStyleUsingElementsByClass("ytp-endscreen-content", recommendation);
 }
 
 let observer = new MutationObserver((mutations) => {
