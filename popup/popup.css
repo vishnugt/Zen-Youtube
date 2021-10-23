@@ -6,7 +6,7 @@ h2 {
 
 .mainview {
 	width: 200px;
-	height: 175px;
+	height: 178px;
 }
 
 .header img {
@@ -16,7 +16,7 @@ h2 {
 .header h1 {
   position: relative;
   top: 6px;
-  left: 10px;
+  left: 8px;
 }
 
 .center { 

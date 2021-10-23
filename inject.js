@@ -33,9 +33,9 @@ var homeFeed = 'none';
 
 chrome.storage.sync.get(['block_comments', 'left_side_bar', 'recommendations', 'home_feed'], function (obj) {
     blockComments = obj.block_comments = undefined ? blockComments : obj.block_comments;
-    leftSidebar = obj.leftSidebar == undefined ? leftSidebar : obj.leftSidebar;
-    recommendation = obj.recommendation == undefined ? recommendation : obj.recommendation;
-    homeFeed = obj.homeFeed == undefined ? homeFeed : obj.homeFeed;
+    leftSidebar = obj.left_side_bar == undefined ? leftSidebar : obj.left_side_bar;
+    recommendation = obj.recommendations == undefined ? recommendation : obj.recommendations;
+    homeFeed = obj.home_feed == undefined ? homeFeed : obj.home_feed;
 });
 
 function removeYoutubeElements() {
@@ -48,6 +48,7 @@ function removeYoutubeElements() {
 
     //Left side bar
     setDisplayStyleUsingElementById("guide-renderer", leftSidebar);
+    setDisplayStyleUsingElementsByClass("ytd-mini-guide-renderer", leftSidebar);
 
     //Recommendations
     setDisplayStyleUsingElementById("related", recommendation);
