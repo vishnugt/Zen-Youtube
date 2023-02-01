@@ -25,7 +25,7 @@ function setDisplayStyleUsingElementsByClass(className, styleValue) {
     }
 }
 
-function removeElementsAndAllChildByName(name, styleValue) {
+function setDisplayStyleUsingElementsdByName(name, styleValue) {
     document.querySelectorAll(name).forEach((item) => {
         item.style.display = styleValue;
     });
@@ -71,7 +71,7 @@ function removeYoutubeElements() {
     setDisplayStyleUsingElementsByClass("ytp-endscreen-content", recommendation);
 
     //Shorts
-    removeElementsAndAllChildByName('ytd-reel-shelf-renderer', shorts);
+    setDisplayStyleUsingElementsdByName('ytd-reel-shelf-renderer', shorts);
     setDisplayStyleUsingElementById("shorts-container", shorts);
     removeShelfByCategory("Shorts", shorts);
 
