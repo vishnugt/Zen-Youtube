@@ -25,17 +25,33 @@ function setDisplayStyleUsingElementsByClass(className, styleValue) {
     }
 }
 
+function setDisplayStyleUsingElementsdByName(name, styleValue) {
+    document.querySelectorAll(name).forEach((item) => {
+        item.style.display = styleValue;
+    });
+}
+
+function removeShelfByCategory(category, styleValue) {
+    document.querySelectorAll('ytd-rich-shelf-renderer').forEach((item) => {
+        if (item.parentElement.querySelector('span').innerText.includes(category)) {
+            item.style.display = styleValue;
+        }
+    });
+}
+
 // Variables to control
 var blockComments = 'none';
 var leftSidebar = 'none';
 var recommendation = 'none';
 var homeFeed = 'none';
+var shorts = 'none';
 
-chrome.storage.sync.get(['block_comments', 'left_side_bar', 'recommendations', 'home_feed'], function (obj) {
+chrome.storage.sync.get(['block_comments', 'left_side_bar', 'recommendations', 'home_feed', 'shorts'], function (obj) {
     blockComments = obj.block_comments = undefined ? blockComments : obj.block_comments;
     leftSidebar = obj.left_side_bar == undefined ? leftSidebar : obj.left_side_bar;
     recommendation = obj.recommendations == undefined ? recommendation : obj.recommendations;
     homeFeed = obj.home_feed == undefined ? homeFeed : obj.home_feed;
+    shorts = obj.shorts == undefined ? shorts : obj.shorts;
 });
 
 function removeYoutubeElements() {
@@ -53,6 +69,12 @@ function removeYoutubeElements() {
     //Recommendations
     setDisplayStyleUsingElementById("related", recommendation);
     setDisplayStyleUsingElementsByClass("ytp-endscreen-content", recommendation);
+
+    //Shorts
+    setDisplayStyleUsingElementsdByName('ytd-reel-shelf-renderer', shorts);
+    setDisplayStyleUsingElementById("shorts-container", shorts);
+    removeShelfByCategory("Shorts", shorts);
+
 }
 
 let observer = new MutationObserver((mutations) => {
@@ -65,11 +87,11 @@ observer.observe(document, {
 })
 
 chrome.storage.onChanged.addListener(function (changes, namespace) {
-    for (let[key, {
-                oldValue,
-                newValue
-            }
-        ]of Object.entries(changes)) {
+    for (let [key, {
+        oldValue,
+        newValue
+    }
+    ] of Object.entries(changes)) {
 
         if (key == "block_comments") {
             blockComments = newValue;
@@ -85,6 +107,10 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 
         if (key == "home_feed") {
             homeFeed = newValue;
+        }
+
+        if (key == "shorts") {
+            shorts = newValue;
         }
     }
     removeYoutubeElements();
