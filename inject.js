@@ -1,17 +1,3 @@
-function removeElementsByClass(className) {
-    const elements = document.getElementsByClassName(className);
-    while (elements.length > 0) {
-        elements[0].parentNode.removeChild(elements[0]);
-    }
-}
-
-function removeElementById(id) {
-    const element = document.getElementById(id);
-    if (element) {
-        element.parentNode.removeChild(element);
-    }
-}
-
 function setDisplayStyleUsingElementById(id, styleValue) {
     if (document.getElementById(id)) {
         document.getElementById(id).style.display = styleValue;
@@ -25,11 +11,17 @@ function setDisplayStyleUsingElementsByClass(className, styleValue) {
     }
 }
 
-function setDisplayStyleUsingElementsdByName(name, styleValue) {
-    document.querySelectorAll(name).forEach((item) => {
-        item.style.display = styleValue;
+function setDisplayForYtdReelShelfRenderer(styleValue) {
+    const elements = document.querySelectorAll('ytd-reel-shelf-renderer');
+    elements.forEach(element => {
+        if (styleValue === 'none') {
+            if (element.parentNode) {
+                element.parentNode.removeChild(element);
+            }
+        }
     });
 }
+
 
 // Variables to control
 var blockComments = 'none';
@@ -63,7 +55,9 @@ function removeYoutubeElements() {
     setDisplayStyleUsingElementsByClass("ytp-endscreen-content", recommendation);
 
     //Shorts
-    setDisplayStyleUsingElementById("dismissible", shorts);
+    setDisplayStyleUsingElementsByClass("ytd-rich-section-renderer", shorts);
+    setDisplayForYtdReelShelfRenderer(shorts);
+    
 }
 
 let observer = new MutationObserver((mutations) => {
