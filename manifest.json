@@ -2,7 +2,7 @@
     "name": "Zen YouTube: Distraction free youtube",
     "version": "1.0.0",
     "manifest_version": 3,
-    "description": "Removes feed and recommendations from YouTube so that you can have a distraction free focused session",
+    "description": "Block YouTube Shorts, feed, recommendations, and comments to stay focused and reduce distractions.",
     "homepage_url": "https://github.com/vishnugt/Zen-Youtube",
     "icons": {
         "16": "icons/icon16.png",
