@@ -1,7 +1,7 @@
 {
     "name": "Zen YouTube: Distraction free youtube",
     "version": "1.0.0",
-    "manifest_version": 2,
+    "manifest_version": 3,
     "description": "Removes feed and recommendations from YouTube so that you can have a distraction free focused session",
     "homepage_url": "https://github.com/vishnugt/Zen-Youtube",
     "icons": {
@@ -10,12 +10,14 @@
         "128": "icons/icon128.png"
     },
     "permissions": [
-        "https://www.youtube.com/*",
-		"storage"
+        "storage"
     ],
-	"browser_action": {
-		"default_popup": "popup/popup.html"
-	},
+    "host_permissions": [
+        "https://www.youtube.com/*"
+    ],
+    "action": {
+        "default_popup": "popup/popup.html"
+    },
     "content_scripts": [{
             "run_at": "document_start",
             "matches": [

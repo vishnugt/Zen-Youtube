@@ -31,14 +31,6 @@ function setDisplayStyleUsingElementsdByName(name, styleValue) {
     });
 }
 
-function removeShelfByCategory(category, styleValue) {
-    document.querySelectorAll('ytd-rich-shelf-renderer').forEach((item) => {
-        if (item.parentElement.querySelector('span').innerText.includes(category)) {
-            item.style.display = styleValue;
-        }
-    });
-}
-
 // Variables to control
 var blockComments = 'none';
 var leftSidebar = 'none';
@@ -46,8 +38,8 @@ var recommendation = 'none';
 var homeFeed = 'none';
 var shorts = 'none';
 
-chrome.storage.sync.get(['block_comments', 'left_side_bar', 'recommendations', 'home_feed', 'shorts'], function (obj) {
-    blockComments = obj.block_comments = undefined ? blockComments : obj.block_comments;
+chrome.storage.sync.get(['block_comments', 'left_side_bar', 'recommendations', 'home_feed', 'shorts']).then((obj) => {
+    blockComments = obj.block_comments == undefined ? blockComments : obj.block_comments;
     leftSidebar = obj.left_side_bar == undefined ? leftSidebar : obj.left_side_bar;
     recommendation = obj.recommendations == undefined ? recommendation : obj.recommendations;
     homeFeed = obj.home_feed == undefined ? homeFeed : obj.home_feed;
@@ -71,10 +63,7 @@ function removeYoutubeElements() {
     setDisplayStyleUsingElementsByClass("ytp-endscreen-content", recommendation);
 
     //Shorts
-    setDisplayStyleUsingElementsdByName('ytd-reel-shelf-renderer', shorts);
-    setDisplayStyleUsingElementById("shorts-container", shorts);
-    removeShelfByCategory("Shorts", shorts);
-
+    setDisplayStyleUsingElementById("dismissible", shorts);
 }
 
 let observer = new MutationObserver((mutations) => {

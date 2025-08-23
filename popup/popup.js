@@ -1,4 +1,4 @@
-chrome.storage.sync.get(['block_comments', 'left_side_bar', 'recommendations', 'home_feed', 'shorts'], function (obj) {
+chrome.storage.sync.get(['block_comments', 'left_side_bar', 'recommendations', 'home_feed', 'shorts']).then((obj) => {
     document.getElementById('block_comments_cb').checked = obj.block_comments == undefined ? true : obj.block_comments;
     document.getElementById('left_side_bar_cb').checked = obj.left_side_bar == undefined ? true : obj.left_side_bar;
     document.getElementById('recommendations_cb').checked = obj.recommendations == undefined ? true : obj.recommendations;
